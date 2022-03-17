@@ -1,4 +1,4 @@
-db_products = {
+bd_products = {
     1:  ['Manzanas',   5000.0, 25],
     2:  ['Limones',    2300.0, 15],
     3:  ['Peras',      2700.0, 33],
@@ -12,50 +12,75 @@ db_products = {
 }
 
 
-#LEER
+# LEER
 def read(bd, code):
     return bd.get(code)
 
-#AGREGAR
-def add(bd, code, value):
-    bd[code] = value
+
+# Add
+def add(bd):
+    code = input('Please insert the code of the product: ')
+    product_name = input('Please insert the name of the product: ')
+    product_price = input('Please insert the prince of the product: ')
+    product_quantity = input('Please insert the current quantity of the product: ')
+    bd[code] = [product_name, product_price, product_quantity]
     return bd
 
-#ACTUALIZAR
-def update(bd, code, value):
-    bd.update({code: value})
+
+# Update
+def update(bd):
+    code = input('Please insert the code of the product')
+    product_name = input('Please insert the name of the product')
+    product_price = input('Please insert the prince of the product')
+    product_quantity = input('Please insert the current quantity of the product')
+    bd.update({code: [product_name, product_price, product_quantity]})
     return bd
 
-#BORRAR
+
+# Delete
 def delete(bd, code):
     bd.pop(code)
     return bd
 
-print("========================================")
-print("| BIENVENIDO A LA TIENDA DE PEPE       |")
-print("|          MENU                        |")
-print("| 1. AGREGAR PRODUCTO                  |")
-print("| 2. BORRAR PRODUCTO                   |")
-print("| 3. ACTUALIZAR PRODCUTO               |")
-print("| 4. VERIFICAR PRODCUTO                |")
-print("| 5. ARROJAR INFORME                   |")
-print("| 6. SALIR                             |")
-print("| 7. ACTUALIZAR PRODCUTO               |")
-print("========================================")
-print("*POR FAVOR INGRESE LA OPCION A EJECUTAR*")
 
-input_user = 0
-while(input_user != 7):
+# Print DB
+def bd_print(bd):
+    for key,value in bd.items():
+        print('ID:', key, 'Product:', value[0], ', Price:', value[1], ', Quantity:', value[2])
+
+
+# Print Menu
+def menu():
     print("========================================")
-    print("| BIENVENIDO A LA TIENDA DE PEPE       |")
-    print("|          MENU                        |")
-    print("| 1. AGREGAR PRODUCTO                  |")
-    print("| 2. BORRAR PRODUCTO                   |")
-    print("| 3. ACTUALIZAR PRODCUTO               |")
-    print("| 4. VERIFICAR PRODCUTO                |")
-    print("| 5. ARROJAR INFORME                   |")
-    print("| 6. SALIR                             |")
-    print("| 7. ACTUALIZAR PRODCUTO               |")
+    print("|        WELCOME TO THE STORE          |")
+    print("|                 MENU                 |")
+    print("| 1. ADD PRODUCT                       |")
+    print("| 2. DELETE PRODUCT                    |")
+    print("| 3. UPDATE PRODUCT                    |")
+    print("| 4. VERIFY PRODUCT                    |")
+    print("| 5. MAKE A REPORT                     |")
+    print("| 6. SHOW THE CURRENT DB               |")
+    print("| 6. EXIT                              |")
     print("========================================")
-    print()
-    input_user = input("*POR FAVOR INGRESE LA OPCION A EJECUTAR*")
+    input_user = int(input("Please select an option, an then press enter: "))
+    if (input_user == 1):
+        add(bd_products)
+        menu()
+    elif(input_user == 2):
+        pass
+    elif(input_user == 3):
+        update(bd_products)
+        menu()
+    elif(input_user == 4):
+        pass
+    elif(input_user == 5):
+        pass
+    elif(input_user == 6):
+        bd_print(bd_products)
+        menu()
+    elif(input_user == 0):
+        exit()
+
+
+if __name__ == "__main__":
+    menu()
